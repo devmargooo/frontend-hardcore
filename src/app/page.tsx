@@ -1,14 +1,14 @@
 'use client';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './page.module.css';
-import { RootState } from '@/store/store';
-import { increment } from '@/store/counter/counter';
+import { incrementAsync, selectCount } from '@/store/counter/counter';
 import { useEffect, useState } from 'react';
+import { AppDispatch } from '@/store/types';
 
 export default function Home() {
   const [items, setItems] = useState([]);
-  const countState = useSelector((state: RootState) => state.counter.value);
-  const dispatch = useDispatch();
+  const count = useSelector(selectCount);
+  const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     fetch('/api/video')
@@ -18,8 +18,8 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <div>
-        {countState}
-        <button type='button' onClick={() => dispatch(increment())}>
+        {count}
+        <button type='button' onClick={() => dispatch(incrementAsync())}>
           +
         </button>
       </div>
