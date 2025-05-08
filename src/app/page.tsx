@@ -11,7 +11,7 @@ export default function Home() {
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
-    fetch('/api/video?limit=5&offset=0')
+    fetch('http://localhost:3001/video')
       .then((res) => res.json())
       .then((data) => setItems(data));
   }, []);
